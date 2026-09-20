@@ -1,6 +1,7 @@
 {
     "name": "ArenaSurvivor.Tests.EditMode",
     "references": [
+        "ArenaSurvivor.Enemies",
         "ArenaSurvivor.Player",
         "ArenaSurvivor.Systems",
         "UnityEngine.TestRunner",

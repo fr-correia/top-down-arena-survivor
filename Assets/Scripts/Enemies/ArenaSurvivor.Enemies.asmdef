@@ -1,6 +1,6 @@
 {
-    "name": "ArenaSurvivor.Player",
-    "references": ["ArenaSurvivor.Systems", "Unity.InputSystem"],
+    "name": "ArenaSurvivor.Enemies",
+    "references": ["ArenaSurvivor.Systems"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
