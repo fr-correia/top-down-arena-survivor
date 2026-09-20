@@ -1,7 +1,9 @@
 {
     "name": "ArenaSurvivor.Tests.EditMode",
     "references": [
-        "ArenaSurvivor.Player"
+        "ArenaSurvivor.Player",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
