@@ -7,8 +7,8 @@ aims a weapon, kills drop XP, leveling up offers a choice of upgrades. Built in 
 see `SESSION_PLAN.md` for the build order.
 
 ## Environment
-- Unity version: <FILL IN — e.g. 6000.0.x LTS>
-- Render pipeline: <FILL IN — URP 2D recommended for a 2D project>
+- Unity version: 6000.6.2f1
+- Render pipeline: Universal Render Pipeline (2D Renderer)
 - Platform target: PC (Windows/Mac), keyboard + gamepad via the new Input System
 - Input: use Unity's Input System package (not the legacy Input Manager)
 - Physics: Physics2D (Rigidbody2D, Collider2D) for all movement/collision
@@ -48,6 +48,8 @@ Assets/
     Upgrades/
   Prefabs/
   Scenes/
+  Sprites/         (placeholder/generated sprite assets)
+  Editor/          (Editor-only tooling, e.g. scene-builder scripts)
   Tests/           (EditMode/PlayMode NUnit tests)
 ```
 
@@ -58,6 +60,12 @@ Assets/
   rather than requiring callers to poll state every frame
 - Every plain (non-MonoBehaviour) gameplay class should have a matching EditMode test
   in `Assets/Tests` where the logic is non-trivial (damage calc, leveling curve, etc.)
+- Every `Assets/Scripts/<Folder>` needs its own `ArenaSurvivor.<Folder>.asmdef` (empty
+  `references`, `autoReferenced: true`, plus any package assembly references that
+  folder's code actually needs — e.g. `Unity.InputSystem` for `Player`). This is what
+  lets the EditMode test assembly compile against it. Whenever you add such an asmdef,
+  also add a reference to it from
+  `Assets/Tests/EditMode/ArenaSurvivor.Tests.EditMode.asmdef`.
 
 ## Verifying changes
 After making script changes, check for compile errors before considering a task done.
@@ -66,4 +74,4 @@ If Unity batch-mode compilation is set up (`Unity -batchmode -quit -projectPath 
 from the Unity Console after they reload the project, and treat that as the test result.
 
 ## Current status
-<FILL IN as you go — e.g. "Stage 1 (player movement + camera) in progress">
+Stage 1 (player movement + camera follow) in progress.
