@@ -18,9 +18,23 @@ namespace ArenaSurvivor.EditorTools
         [MenuItem("Arena Survivor/Build Stage 2 Enemy")]
         public static void AddEnemyAndPlayerHealth()
         {
+            EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+
             Scene scene = EditorSceneManager.OpenScene(ScenePath);
 
             GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("Arena Survivor: Stage2SceneBuilder could not find a GameObject named 'Player' in " + ScenePath);
+                return;
+            }
+
+            if (player.GetComponent<HealthComponent>() != null)
+            {
+                Debug.LogWarning("Arena Survivor: Player already has a HealthComponent — Stage 2 wiring already applied, skipping. Delete it manually first if you want to re-run with new settings.");
+                return;
+            }
+
             HealthComponent playerHealth = player.AddComponent<HealthComponent>();
             SetMaxHealth(playerHealth, 100);
             player.AddComponent<PlayerDeathReaction>();
@@ -53,6 +67,7 @@ namespace ArenaSurvivor.EditorTools
             rb.gravityScale = 0f;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
 
             enemy.AddComponent<BoxCollider2D>();
             HealthComponent health = enemy.AddComponent<HealthComponent>();
