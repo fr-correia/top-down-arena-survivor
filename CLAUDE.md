@@ -48,6 +48,8 @@ Assets/
     Upgrades/
   Prefabs/
   Scenes/
+  Sprites/         (placeholder/generated sprite assets)
+  Editor/          (Editor-only tooling, e.g. scene-builder scripts)
   Tests/           (EditMode/PlayMode NUnit tests)
 ```
 
@@ -58,6 +60,12 @@ Assets/
   rather than requiring callers to poll state every frame
 - Every plain (non-MonoBehaviour) gameplay class should have a matching EditMode test
   in `Assets/Tests` where the logic is non-trivial (damage calc, leveling curve, etc.)
+- Every `Assets/Scripts/<Folder>` needs its own `ArenaSurvivor.<Folder>.asmdef` (empty
+  `references`, `autoReferenced: true`, plus any package assembly references that
+  folder's code actually needs — e.g. `Unity.InputSystem` for `Player`). This is what
+  lets the EditMode test assembly compile against it. Whenever you add such an asmdef,
+  also add a reference to it from
+  `Assets/Tests/EditMode/ArenaSurvivor.Tests.EditMode.asmdef`.
 
 ## Verifying changes
 After making script changes, check for compile errors before considering a task done.
