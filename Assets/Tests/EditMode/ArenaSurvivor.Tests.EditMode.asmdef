@@ -2,6 +2,7 @@
     "name": "ArenaSurvivor.Tests.EditMode",
     "references": [
         "ArenaSurvivor.Player",
+        "ArenaSurvivor.Systems",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],
