@@ -1,6 +1,6 @@
 {
     "name": "ArenaSurvivor.Player",
-    "references": [],
+    "references": ["Unity.InputSystem"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
