@@ -7,8 +7,8 @@ aims a weapon, kills drop XP, leveling up offers a choice of upgrades. Built in 
 see `SESSION_PLAN.md` for the build order.
 
 ## Environment
-- Unity version: <FILL IN — e.g. 6000.0.x LTS>
-- Render pipeline: <FILL IN — URP 2D recommended for a 2D project>
+- Unity version: 6000.6.2f1
+- Render pipeline: Universal Render Pipeline (2D Renderer)
 - Platform target: PC (Windows/Mac), keyboard + gamepad via the new Input System
 - Input: use Unity's Input System package (not the legacy Input Manager)
 - Physics: Physics2D (Rigidbody2D, Collider2D) for all movement/collision
@@ -66,4 +66,4 @@ If Unity batch-mode compilation is set up (`Unity -batchmode -quit -projectPath 
 from the Unity Console after they reload the project, and treat that as the test result.
 
 ## Current status
-<FILL IN as you go — e.g. "Stage 1 (player movement + camera) in progress">
+Stage 1 (player movement + camera follow) in progress.
