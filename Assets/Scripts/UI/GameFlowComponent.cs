@@ -23,8 +23,16 @@ namespace ArenaSurvivor.UI
         {
             flow = new GameFlow();
             flow.OnStateChanged += HandleStateChanged;
-            startButton.onClick.AddListener(StartGame);
-            restartButton.onClick.AddListener(RestartGame);
+
+            if (startButton != null)
+            {
+                startButton.onClick.AddListener(StartGame);
+            }
+
+            if (restartButton != null)
+            {
+                restartButton.onClick.AddListener(RestartGame);
+            }
         }
 
         private void OnEnable()
