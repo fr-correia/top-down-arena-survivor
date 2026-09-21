@@ -1,6 +1,6 @@
 {
     "name": "ArenaSurvivor.UI",
-    "references": ["ArenaSurvivor.Systems", "UnityEngine.UI"],
+    "references": ["ArenaSurvivor.Systems", "ArenaSurvivor.Data", "UnityEngine.UI"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
