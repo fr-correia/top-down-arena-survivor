@@ -4,6 +4,7 @@
         "ArenaSurvivor.Enemies",
         "ArenaSurvivor.Player",
         "ArenaSurvivor.Systems",
+        "ArenaSurvivor.Weapons",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

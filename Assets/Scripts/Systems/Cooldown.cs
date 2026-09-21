@@ -1,11 +1,11 @@
 namespace ArenaSurvivor.Systems
 {
-    public class DamageCooldown
+    public class Cooldown
     {
         private readonly float interval;
         private float lastTriggerTime = float.NegativeInfinity;
 
-        public DamageCooldown(float interval)
+        public Cooldown(float interval)
         {
             this.interval = interval;
         }

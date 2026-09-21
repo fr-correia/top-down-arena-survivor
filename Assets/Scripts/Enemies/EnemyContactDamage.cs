@@ -9,11 +9,11 @@ namespace ArenaSurvivor.Enemies
         [SerializeField] private int damageAmount = 10;
         [SerializeField] private float damageInterval = 1f;
 
-        private DamageCooldown cooldown;
+        private Cooldown cooldown;
 
         private void Awake()
         {
-            cooldown = new DamageCooldown(damageInterval);
+            cooldown = new Cooldown(damageInterval);
         }
 
         private void OnCollisionStay2D(Collision2D collision)
