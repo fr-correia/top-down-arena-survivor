@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6611065544552066173}
   - component: {fileID: 4476475760578825572}
   - component: {fileID: 9055968965850956512}
+  - component: {fileID: 1821392604229145572}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -251,3 +252,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d031672476f27146941b1a3e84e8953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ArenaSurvivor.Systems::ArenaSurvivor.Systems.PooledObject
+--- !u!114 &1821392604229145572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082791797165107218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85511d11fcca54a4cb9168d95ede32a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArenaSurvivor.Systems::ArenaSurvivor.Systems.HitFlashComponent
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.1
