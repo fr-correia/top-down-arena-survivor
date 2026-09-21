@@ -41,5 +41,54 @@ namespace ArenaSurvivor.Tests.EditMode
             Assert.IsFalse(cooldown.TryConsume(1.5f));
             Assert.IsTrue(cooldown.TryConsume(2.0f));
         }
+
+        [Test]
+        public void IsReady_BeforeAnyConsume_MatchesTryConsumeAnswer()
+        {
+            var cooldown = new Cooldown(1f);
+
+            Assert.IsTrue(cooldown.IsReady(0f));
+        }
+
+        [Test]
+        public void IsReady_RepeatedCallsWhenNotReady_NeverBecomesTrueOnItsOwn()
+        {
+            var cooldown = new Cooldown(1f);
+            cooldown.TryConsume(0f);
+
+            Assert.IsFalse(cooldown.IsReady(0.5f));
+            Assert.IsFalse(cooldown.IsReady(0.5f));
+            Assert.IsFalse(cooldown.IsReady(0.5f));
+        }
+
+        [Test]
+        public void IsReady_DoesNotAdvanceInternalTimer_TryConsumeStillNeededToArm()
+        {
+            var cooldown = new Cooldown(1f);
+            cooldown.TryConsume(0f);
+
+            // Peeking repeatedly at t=1.0 must not itself consume the cooldown.
+            Assert.IsTrue(cooldown.IsReady(1.0f));
+            Assert.IsTrue(cooldown.IsReady(1.0f));
+            Assert.IsTrue(cooldown.IsReady(1.0f));
+
+            // Only an actual TryConsume should arm the next interval.
+            Assert.IsTrue(cooldown.TryConsume(1.0f));
+            Assert.IsFalse(cooldown.IsReady(1.5f));
+        }
+
+        [Test]
+        public void IsReady_MatchesTryConsumeAnswer_WithoutSideEffect()
+        {
+            var cooldown = new Cooldown(1f);
+            cooldown.TryConsume(0f);
+
+            // IsReady says false before the interval elapses.
+            Assert.IsFalse(cooldown.IsReady(0.9f));
+
+            // IsReady says true once the interval has elapsed, matching what TryConsume would return.
+            Assert.IsTrue(cooldown.IsReady(1.0f));
+            Assert.IsTrue(cooldown.TryConsume(1.0f));
+        }
     }
 }

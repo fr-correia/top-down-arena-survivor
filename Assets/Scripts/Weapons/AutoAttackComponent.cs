@@ -12,25 +12,22 @@ namespace ArenaSurvivor.Weapons
         [SerializeField] private GameObject projectilePrefab;
 
         private Cooldown cooldown;
+        private AutoAttack autoAttack;
 
         private void Awake()
         {
             cooldown = new Cooldown(attackInterval);
+            autoAttack = new AutoAttack();
         }
 
         private void Update()
         {
-            if (!cooldown.TryConsume(Time.time))
+            if (!cooldown.IsReady(Time.time))
             {
                 return;
             }
 
             EnemyChaseComponent[] enemies = Object.FindObjectsByType<EnemyChaseComponent>(FindObjectsSortMode.None);
-            if (enemies.Length == 0)
-            {
-                return;
-            }
-
             var positions = new List<Vector2>(enemies.Length);
             foreach (EnemyChaseComponent enemy in enemies)
             {
@@ -38,14 +35,19 @@ namespace ArenaSurvivor.Weapons
             }
 
             Vector2 origin = transform.position;
-            int nearestIndex = NearestTargetSelector.FindNearestIndex(origin, positions);
-            Vector2 targetPosition = positions[nearestIndex];
-            if (Vector2.Distance(origin, targetPosition) > range)
+            if (!autoAttack.TryGetShotDirection(origin, positions, range, out Vector2 direction))
             {
                 return;
             }
 
-            Vector2 direction = (targetPosition - origin).normalized;
+            cooldown.TryConsume(Time.time);
+
+            if (projectilePrefab == null)
+            {
+                Debug.LogError("AutoAttackComponent: projectilePrefab is not assigned on " + name);
+                return;
+            }
+
             GameObject projectileInstance = Instantiate(projectilePrefab, origin, Quaternion.identity);
             projectileInstance.GetComponent<ProjectileComponent>().Launch(direction);
         }

@@ -10,9 +10,14 @@ namespace ArenaSurvivor.Systems
             this.interval = interval;
         }
 
+        public bool IsReady(float currentTime)
+        {
+            return currentTime - lastTriggerTime >= interval;
+        }
+
         public bool TryConsume(float currentTime)
         {
-            if (currentTime - lastTriggerTime < interval)
+            if (!IsReady(currentTime))
             {
                 return false;
             }
