@@ -46,5 +46,10 @@ namespace ArenaSurvivor.Player
             Vector2 nextPosition = playerMovement.ComputeNextPosition(rb.position, input, moveSpeed, Time.fixedDeltaTime);
             rb.MovePosition(nextPosition);
         }
+
+        public void IncreaseSpeed(float amount)
+        {
+            moveSpeed += amount;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace ArenaSurvivor.Weapons
     {
         [SerializeField] private float speed = 12f;
         [SerializeField] private float lifetime = 3f;
-        [SerializeField] private int damage = 10;
+        private int damage;
 
         private Rigidbody2D rb;
         private Projectile projectile;
@@ -21,8 +21,9 @@ namespace ArenaSurvivor.Weapons
             projectile = new Projectile();
         }
 
-        public void Launch(Vector2 direction)
+        public void Launch(Vector2 direction, int damage)
         {
+            this.damage = damage;
             velocity = direction.normalized * speed;
             Destroy(gameObject, lifetime);
         }

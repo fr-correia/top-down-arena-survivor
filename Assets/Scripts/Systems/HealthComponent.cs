@@ -22,6 +22,11 @@ namespace ArenaSurvivor.Systems
             health.TakeDamage(amount);
         }
 
+        public void IncreaseMaxHealth(int amount)
+        {
+            health.IncreaseMaxHealth(amount);
+        }
+
         private void HandleDeath()
         {
             OnDeath?.Invoke();

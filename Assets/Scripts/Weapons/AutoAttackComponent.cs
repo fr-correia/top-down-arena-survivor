@@ -10,9 +10,11 @@ namespace ArenaSurvivor.Weapons
         [SerializeField] private float attackInterval = 1f;
         [SerializeField] private float range = 8f;
         [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private int baseDamage = 10;
 
         private Cooldown cooldown;
         private AutoAttack autoAttack;
+        private int damageBonus;
 
         private void Awake()
         {
@@ -49,7 +51,17 @@ namespace ArenaSurvivor.Weapons
             }
 
             GameObject projectileInstance = Instantiate(projectilePrefab, origin, Quaternion.identity);
-            projectileInstance.GetComponent<ProjectileComponent>().Launch(direction);
+            projectileInstance.GetComponent<ProjectileComponent>().Launch(direction, baseDamage + damageBonus);
+        }
+
+        public void IncreaseDamage(int amount)
+        {
+            damageBonus += amount;
+        }
+
+        public void ReduceAttackInterval(float amount)
+        {
+            cooldown.SetInterval(cooldown.Interval - amount);
         }
     }
 }

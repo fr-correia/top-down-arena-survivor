@@ -6,6 +6,7 @@
         "ArenaSurvivor.Systems",
         "ArenaSurvivor.Weapons",
         "ArenaSurvivor.UI",
+        "ArenaSurvivor.Data",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

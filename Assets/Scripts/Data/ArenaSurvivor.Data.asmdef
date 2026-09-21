@@ -1,0 +1,13 @@
+{
+    "name": "ArenaSurvivor.Data",
+    "references": ["ArenaSurvivor.Player", "ArenaSurvivor.Weapons", "ArenaSurvivor.Systems"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
