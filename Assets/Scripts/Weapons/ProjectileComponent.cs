@@ -1,4 +1,5 @@
 using UnityEngine;
+using ArenaSurvivor.Enemies;
 using ArenaSurvivor.Systems;
 
 namespace ArenaSurvivor.Weapons
@@ -34,6 +35,11 @@ namespace ArenaSurvivor.Weapons
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.GetComponent<EnemyChaseComponent>() == null)
+            {
+                return;
+            }
+
             HealthComponent healthComponent = other.GetComponent<HealthComponent>();
             if (healthComponent == null)
             {
