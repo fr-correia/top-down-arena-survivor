@@ -85,5 +85,30 @@ namespace ArenaSurvivor.Tests.EditMode
             Assert.AreEqual(50, health.MaxHealth);
             Assert.AreEqual(50, health.CurrentHealth);
         }
+
+        [Test]
+        public void ResetHealth_RestoresCurrentHealthAndClearsIsDead()
+        {
+            var health = new Health(50);
+            health.TakeDamage(50);
+
+            health.ResetHealth();
+
+            Assert.AreEqual(50, health.CurrentHealth);
+            Assert.IsFalse(health.IsDead);
+        }
+
+        [Test]
+        public void ResetHealth_AllowsTakeDamageToWorkAgain()
+        {
+            var health = new Health(50);
+            health.TakeDamage(50);
+            health.ResetHealth();
+
+            health.TakeDamage(20);
+
+            Assert.AreEqual(30, health.CurrentHealth);
+            Assert.IsFalse(health.IsDead);
+        }
     }
 }

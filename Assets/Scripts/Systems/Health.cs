@@ -42,5 +42,11 @@ namespace ArenaSurvivor.Systems
             MaxHealth += amount;
             CurrentHealth += amount;
         }
+
+        public void ResetHealth()
+        {
+            CurrentHealth = MaxHealth;
+            IsDead = false;
+        }
     }
 }

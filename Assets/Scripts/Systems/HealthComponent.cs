@@ -27,6 +27,11 @@ namespace ArenaSurvivor.Systems
             health.IncreaseMaxHealth(amount);
         }
 
+        public void ResetHealth()
+        {
+            health.ResetHealth();
+        }
+
         private void HandleDeath()
         {
             OnDeath?.Invoke();
