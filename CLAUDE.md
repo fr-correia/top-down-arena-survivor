@@ -52,6 +52,10 @@ Assets/
   Editor/          (Editor-only tooling, e.g. scene-builder scripts)
   Tests/           (EditMode/PlayMode NUnit tests)
 ```
+Note: `WaveDefinition` lives in `Assets/Scripts/Enemies/` rather than `Assets/Scripts/Data/`,
+because `Data` already references `Weapons`, which references `Enemies` — a ScriptableObject
+that `Enemies`-namespace code needs to consume can't live in `Data` without creating an
+assembly cycle.
 
 ## Coding conventions
 - Namespace root: `ArenaSurvivor.*` matching the folder (e.g. `ArenaSurvivor.Player`)
