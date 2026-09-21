@@ -14,6 +14,7 @@ namespace ArenaSurvivor.Weapons
         private Rigidbody2D rb;
         private Projectile projectile;
         private Vector2 velocity;
+        private bool hasReturned;
 
         private void Awake()
         {
@@ -24,6 +25,7 @@ namespace ArenaSurvivor.Weapons
         public void Launch(Vector2 direction, int damage)
         {
             CancelInvoke();
+            hasReturned = false;
             this.damage = damage;
             velocity = direction.normalized * speed;
             Invoke(nameof(ReturnToPoolOrDestroy), lifetime);
@@ -54,6 +56,12 @@ namespace ArenaSurvivor.Weapons
 
         private void ReturnToPoolOrDestroy()
         {
+            if (hasReturned)
+            {
+                return;
+            }
+            hasReturned = true;
+
             CancelInvoke();
             PooledObject pooled = GetComponent<PooledObject>();
             if (pooled != null)

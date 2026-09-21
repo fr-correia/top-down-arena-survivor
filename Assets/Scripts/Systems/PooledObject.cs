@@ -14,7 +14,14 @@ namespace ArenaSurvivor.Systems
 
         public void ReturnToPool()
         {
-            releaseAction?.Invoke(gameObject);
+            if (releaseAction != null)
+            {
+                releaseAction.Invoke(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

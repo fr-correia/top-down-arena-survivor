@@ -54,6 +54,8 @@ namespace ArenaSurvivor.Weapons
             }
 
             GameObject projectileInstance = projectilePool.Get();
+            Rigidbody2D projectileRb = projectileInstance.GetComponent<Rigidbody2D>();
+            projectileRb.position = origin;
             projectileInstance.transform.position = origin;
             projectileInstance.GetComponent<ProjectileComponent>().Launch(direction, baseDamage + damageBonus);
         }

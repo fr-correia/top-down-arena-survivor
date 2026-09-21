@@ -47,7 +47,12 @@ namespace ArenaSurvivor.Enemies
             GameObject enemy = pool.Get();
 
             float angle = Random.value * Mathf.PI * 2f;
-            Vector2 spawnPosition = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
+            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
+            Vector2 spawnPosition = (Vector2)target.position + offset;
+
+            Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+            rb.position = spawnPosition;
+            rb.linearVelocity = Vector2.zero;
             enemy.transform.position = spawnPosition;
 
             enemy.GetComponent<EnemyChaseComponent>().SetTarget(target);
