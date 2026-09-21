@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 299081868}
   - component: {fileID: 299081873}
   - component: {fileID: 299081872}
+  - component: {fileID: 299081874}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -419,6 +420,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ArenaSurvivor.Systems::ArenaSurvivor.Systems.HealthComponent
   maxHealth: 100
+--- !u!114 &299081874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299081866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162171dd9bcfeb7428ab72715d302759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArenaSurvivor.Weapons::ArenaSurvivor.Weapons.AutoAttackComponent
+  attackInterval: 1
+  range: 8
+  projectilePrefab: {fileID: 8885916582012612681, guid: 57f81d269dbe03545aaceddb3c4d649f, type: 3}
 --- !u!1 &545519225
 GameObject:
   m_ObjectHideFlags: 0
