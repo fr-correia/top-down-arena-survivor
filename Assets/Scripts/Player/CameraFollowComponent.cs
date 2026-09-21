@@ -9,11 +9,13 @@ namespace ArenaSurvivor.Player
 
         private CameraFollow cameraFollow;
         private ScreenShakeComponent screenShake;
+        private Vector3 basePosition;
 
         private void Awake()
         {
             cameraFollow = new CameraFollow();
             screenShake = GetComponent<ScreenShakeComponent>();
+            basePosition = transform.position;
         }
 
         public void SetTarget(Transform newTarget)
@@ -28,9 +30,10 @@ namespace ArenaSurvivor.Player
                 return;
             }
 
-            Vector2 next = cameraFollow.ComputeNextPosition(transform.position, target.position, followSpeed, Time.deltaTime);
-            Vector3 finalPosition = new Vector3(next.x, next.y, transform.position.z);
+            Vector2 next = cameraFollow.ComputeNextPosition(basePosition, target.position, followSpeed, Time.deltaTime);
+            basePosition = new Vector3(next.x, next.y, basePosition.z);
 
+            Vector3 finalPosition = basePosition;
             if (screenShake != null)
             {
                 finalPosition += screenShake.GetCurrentOffset();

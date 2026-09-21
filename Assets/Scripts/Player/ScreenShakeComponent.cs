@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using ArenaSurvivor.Systems;
 
@@ -35,7 +34,7 @@ namespace ArenaSurvivor.Player
         {
             if (shakeElapsed < shakeDuration)
             {
-                shakeElapsed += Time.deltaTime;
+                shakeElapsed += Time.unscaledDeltaTime;
                 Vector2 offset = shake.ComputeOffset(shakeElapsed, shakeDuration, shakeMagnitude, random);
                 currentOffset = new Vector3(offset.x, offset.y, 0f);
             }
