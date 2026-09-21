@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6611065544552066173}
   - component: {fileID: 4476475760578825572}
   - component: {fileID: 9055968965850956512}
-  - component: {fileID: 1821392604229145572}
+  - component: {fileID: 2150592630676012102}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d031672476f27146941b1a3e84e8953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ArenaSurvivor.Systems::ArenaSurvivor.Systems.PooledObject
---- !u!114 &1821392604229145572
+--- !u!114 &2150592630676012102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
