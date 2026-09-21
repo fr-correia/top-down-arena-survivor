@@ -4,7 +4,7 @@ namespace ArenaSurvivor.Systems
 {
     public class Health
     {
-        public int MaxHealth { get; }
+        public int MaxHealth { get; private set; }
         public int CurrentHealth { get; private set; }
         public bool IsDead { get; private set; }
 
@@ -30,6 +30,17 @@ namespace ArenaSurvivor.Systems
                 IsDead = true;
                 OnDeath?.Invoke();
             }
+        }
+
+        public void IncreaseMaxHealth(int amount)
+        {
+            if (amount <= 0)
+            {
+                return;
+            }
+
+            MaxHealth += amount;
+            CurrentHealth += amount;
         }
     }
 }

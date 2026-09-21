@@ -2,17 +2,25 @@ namespace ArenaSurvivor.Systems
 {
     public class Cooldown
     {
-        private readonly float interval;
+        private const float MinInterval = 0.1f;
+
         private float lastTriggerTime = float.NegativeInfinity;
+
+        public float Interval { get; private set; }
 
         public Cooldown(float interval)
         {
-            this.interval = interval;
+            Interval = interval;
+        }
+
+        public void SetInterval(float newInterval)
+        {
+            Interval = newInterval < MinInterval ? MinInterval : newInterval;
         }
 
         public bool IsReady(float currentTime)
         {
-            return currentTime - lastTriggerTime >= interval;
+            return currentTime - lastTriggerTime >= Interval;
         }
 
         public bool TryConsume(float currentTime)

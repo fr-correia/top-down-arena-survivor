@@ -90,5 +90,27 @@ namespace ArenaSurvivor.Tests.EditMode
             Assert.IsTrue(cooldown.IsReady(1.0f));
             Assert.IsTrue(cooldown.TryConsume(1.0f));
         }
+
+        [Test]
+        public void SetInterval_ChangesFutureTiming()
+        {
+            var cooldown = new Cooldown(1f);
+            cooldown.TryConsume(0f);
+
+            cooldown.SetInterval(0.5f);
+
+            Assert.IsFalse(cooldown.IsReady(0.3f));
+            Assert.IsTrue(cooldown.IsReady(0.5f));
+        }
+
+        [Test]
+        public void SetInterval_ClampsToFloor_NeverZeroOrNegative()
+        {
+            var cooldown = new Cooldown(1f);
+
+            cooldown.SetInterval(-5f);
+
+            Assert.AreEqual(0.1f, cooldown.Interval, 0.0001f);
+        }
     }
 }

@@ -61,5 +61,29 @@ namespace ArenaSurvivor.Tests.EditMode
 
             Assert.AreEqual(100, health.CurrentHealth);
         }
+
+        [Test]
+        public void IncreaseMaxHealth_RaisesMaxAndCurrentByAmount()
+        {
+            var health = new Health(50);
+            health.TakeDamage(20);
+
+            health.IncreaseMaxHealth(10);
+
+            Assert.AreEqual(60, health.MaxHealth);
+            Assert.AreEqual(40, health.CurrentHealth);
+        }
+
+        [Test]
+        public void IncreaseMaxHealth_NonPositiveAmount_IsNoOp()
+        {
+            var health = new Health(50);
+
+            health.IncreaseMaxHealth(0);
+            health.IncreaseMaxHealth(-5);
+
+            Assert.AreEqual(50, health.MaxHealth);
+            Assert.AreEqual(50, health.CurrentHealth);
+        }
     }
 }
