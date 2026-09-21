@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 293721276294717410}
   - component: {fileID: 502934988658357474}
   - component: {fileID: 4079316890392758183}
+  - component: {fileID: 7232883501332592175}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -182,4 +183,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: ArenaSurvivor.Weapons::ArenaSurvivor.Weapons.ProjectileComponent
   speed: 12
   lifetime: 3
-  damage: 10
+--- !u!114 &7232883501332592175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553076400888519657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d031672476f27146941b1a3e84e8953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArenaSurvivor.Systems::ArenaSurvivor.Systems.PooledObject
