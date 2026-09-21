@@ -23,9 +23,10 @@ namespace ArenaSurvivor.Weapons
 
         public void Launch(Vector2 direction, int damage)
         {
+            CancelInvoke();
             this.damage = damage;
             velocity = direction.normalized * speed;
-            Destroy(gameObject, lifetime);
+            Invoke(nameof(ReturnToPoolOrDestroy), lifetime);
         }
 
         private void FixedUpdate()
@@ -48,7 +49,21 @@ namespace ArenaSurvivor.Weapons
             }
 
             healthComponent.ApplyDamage(damage);
-            Destroy(gameObject);
+            ReturnToPoolOrDestroy();
+        }
+
+        private void ReturnToPoolOrDestroy()
+        {
+            CancelInvoke();
+            PooledObject pooled = GetComponent<PooledObject>();
+            if (pooled != null)
+            {
+                pooled.ReturnToPool();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using ArenaSurvivor.Enemies;
 using ArenaSurvivor.Systems;
 
@@ -15,11 +16,13 @@ namespace ArenaSurvivor.Weapons
         private Cooldown cooldown;
         private AutoAttack autoAttack;
         private int damageBonus;
+        private ObjectPool<GameObject> projectilePool;
 
         private void Awake()
         {
             cooldown = new Cooldown(attackInterval);
             autoAttack = new AutoAttack();
+            projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnGetProjectile, OnReleaseProjectile, OnDestroyProjectile);
         }
 
         private void Update()
@@ -29,8 +32,8 @@ namespace ArenaSurvivor.Weapons
                 return;
             }
 
-            EnemyChaseComponent[] enemies = Object.FindObjectsByType<EnemyChaseComponent>(FindObjectsSortMode.None);
-            var positions = new List<Vector2>(enemies.Length);
+            IReadOnlyList<EnemyChaseComponent> enemies = EnemyRegistry.ActiveEnemies;
+            var positions = new List<Vector2>(enemies.Count);
             foreach (EnemyChaseComponent enemy in enemies)
             {
                 positions.Add(enemy.transform.position);
@@ -50,7 +53,8 @@ namespace ArenaSurvivor.Weapons
                 return;
             }
 
-            GameObject projectileInstance = Instantiate(projectilePrefab, origin, Quaternion.identity);
+            GameObject projectileInstance = projectilePool.Get();
+            projectileInstance.transform.position = origin;
             projectileInstance.GetComponent<ProjectileComponent>().Launch(direction, baseDamage + damageBonus);
         }
 
@@ -62,6 +66,28 @@ namespace ArenaSurvivor.Weapons
         public void ReduceAttackInterval(float amount)
         {
             cooldown.SetInterval(cooldown.Interval - amount);
+        }
+
+        private GameObject CreateProjectile()
+        {
+            GameObject projectile = Instantiate(projectilePrefab);
+            projectile.GetComponent<PooledObject>().Initialize(go => projectilePool.Release(go));
+            return projectile;
+        }
+
+        private void OnGetProjectile(GameObject projectile)
+        {
+            projectile.SetActive(true);
+        }
+
+        private void OnReleaseProjectile(GameObject projectile)
+        {
+            projectile.SetActive(false);
+        }
+
+        private void OnDestroyProjectile(GameObject projectile)
+        {
+            Destroy(projectile);
         }
     }
 }

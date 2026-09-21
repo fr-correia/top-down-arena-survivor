@@ -25,7 +25,15 @@ namespace ArenaSurvivor.Enemies
 
         private void HandleDeath()
         {
-            Destroy(gameObject);
+            PooledObject pooled = GetComponent<PooledObject>();
+            if (pooled != null)
+            {
+                pooled.ReturnToPool();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

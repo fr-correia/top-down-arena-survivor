@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ArenaSurvivor.Data
+namespace ArenaSurvivor.Enemies
 {
     [CreateAssetMenu(fileName = "WaveDefinition", menuName = "Arena Survivor/Wave Definition")]
     public class WaveDefinition : ScriptableObject
