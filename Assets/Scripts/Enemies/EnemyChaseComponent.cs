@@ -32,5 +32,15 @@ namespace ArenaSurvivor.Enemies
             Vector2 nextPosition = enemyChase.ComputeNextPosition(rb.position, target.position, chaseSpeed, Time.fixedDeltaTime);
             rb.MovePosition(nextPosition);
         }
+
+        private void OnEnable()
+        {
+            EnemyRegistry.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            EnemyRegistry.Unregister(this);
+        }
     }
 }
