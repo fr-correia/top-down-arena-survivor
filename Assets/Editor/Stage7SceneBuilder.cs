@@ -136,10 +136,9 @@ namespace ArenaSurvivor.EditorTools
             flowSerialized.FindProperty("runTimer").objectReferenceValue = runTimer;
             flowSerialized.FindProperty("highScoreComponent").objectReferenceValue = highScoreComponent;
             flowSerialized.FindProperty("playerHealth").objectReferenceValue = playerHealth;
+            flowSerialized.FindProperty("startButton").objectReferenceValue = startButton;
+            flowSerialized.FindProperty("restartButton").objectReferenceValue = restartButton;
             flowSerialized.ApplyModifiedProperties();
-
-            startButton.onClick.AddListener(gameFlow.StartGame);
-            restartButton.onClick.AddListener(gameFlow.RestartGame);
 
             return gameFlow;
         }
@@ -232,6 +231,8 @@ namespace ArenaSurvivor.EditorTools
             ok &= VerifyField(serialized, "runTimer");
             ok &= VerifyField(serialized, "highScoreComponent");
             ok &= VerifyField(serialized, "playerHealth");
+            ok &= VerifyField(serialized, "startButton");
+            ok &= VerifyField(serialized, "restartButton");
 
             return ok;
         }

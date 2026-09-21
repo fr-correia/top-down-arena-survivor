@@ -14,6 +14,8 @@ namespace ArenaSurvivor.UI
         [SerializeField] private RunTimerComponent runTimer;
         [SerializeField] private HighScoreComponent highScoreComponent;
         [SerializeField] private HealthComponent playerHealth;
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button restartButton;
 
         private GameFlow flow;
 
@@ -21,6 +23,8 @@ namespace ArenaSurvivor.UI
         {
             flow = new GameFlow();
             flow.OnStateChanged += HandleStateChanged;
+            startButton.onClick.AddListener(StartGame);
+            restartButton.onClick.AddListener(RestartGame);
         }
 
         private void OnEnable()
