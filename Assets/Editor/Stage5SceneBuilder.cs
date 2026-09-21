@@ -39,7 +39,13 @@ namespace ArenaSurvivor.EditorTools
             Upgrade[] upgrades = CreateUpgradeAssets();
 
             EnsureEventSystem();
-            BuildUpgradeChoiceUI(upgrades);
+            UpgradeChoiceComponent upgradeChoice = BuildUpgradeChoiceUI(upgrades);
+
+            if (!VerifyWiring(upgradeChoice))
+            {
+                Debug.LogError("Arena Survivor: Stage 5 wiring verification failed — scene NOT saved. See errors above.");
+                return;
+            }
 
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
@@ -91,7 +97,7 @@ namespace ArenaSurvivor.EditorTools
             eventSystemObject.AddComponent<InputSystemUIInputModule>();
         }
 
-        private static void BuildUpgradeChoiceUI(Upgrade[] upgrades)
+        private static UpgradeChoiceComponent BuildUpgradeChoiceUI(Upgrade[] upgrades)
         {
             var canvasObject = new GameObject("UpgradeChoiceCanvas");
             Canvas canvas = canvasObject.AddComponent<Canvas>();
@@ -131,6 +137,73 @@ namespace ArenaSurvivor.EditorTools
             serialized.ApplyModifiedProperties();
 
             panelObject.SetActive(false);
+
+            return upgradeChoice;
+        }
+
+        private static bool VerifyWiring(UpgradeChoiceComponent upgradeChoice)
+        {
+            if (upgradeChoice == null)
+            {
+                Debug.LogError("Arena Survivor: VerifyWiring failed — UpgradeChoiceComponent instance is null.");
+                return false;
+            }
+
+            var serialized = new SerializedObject(upgradeChoice);
+            bool ok = true;
+
+            ok &= VerifyObjectArrayField(serialized, "availableUpgrades");
+            ok &= VerifyObjectField(serialized, "panelRoot");
+            ok &= VerifyObjectArrayField(serialized, "optionButtons");
+            ok &= VerifyObjectArrayField(serialized, "optionTitles");
+            ok &= VerifyObjectArrayField(serialized, "optionDescriptions");
+
+            return ok;
+        }
+
+        private static bool VerifyObjectField(SerializedObject serialized, string propertyName)
+        {
+            SerializedProperty property = serialized.FindProperty(propertyName);
+            if (property == null)
+            {
+                Debug.LogError("Arena Survivor: VerifyWiring failed — property '" + propertyName + "' not found.");
+                return false;
+            }
+
+            if (property.objectReferenceValue == null)
+            {
+                Debug.LogError("Arena Survivor: VerifyWiring failed — '" + propertyName + "' is null.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool VerifyObjectArrayField(SerializedObject serialized, string propertyName)
+        {
+            SerializedProperty property = serialized.FindProperty(propertyName);
+            if (property == null)
+            {
+                Debug.LogError("Arena Survivor: VerifyWiring failed — property '" + propertyName + "' not found.");
+                return false;
+            }
+
+            if (property.arraySize == 0)
+            {
+                Debug.LogError("Arena Survivor: VerifyWiring failed — '" + propertyName + "' array is empty.");
+                return false;
+            }
+
+            for (int i = 0; i < property.arraySize; i++)
+            {
+                if (property.GetArrayElementAtIndex(i).objectReferenceValue == null)
+                {
+                    Debug.LogError("Arena Survivor: VerifyWiring failed — '" + propertyName + "[" + i + "]' is null.");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static void CreateOptionButton(Transform parent, float xOffset, out Button button, out Text title, out Text description)

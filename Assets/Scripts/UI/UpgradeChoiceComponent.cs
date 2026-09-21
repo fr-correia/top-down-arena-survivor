@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ArenaSurvivor.Data;
 using ArenaSurvivor.Systems;
@@ -23,6 +24,10 @@ namespace ArenaSurvivor.UI
         {
             selector = new UpgradeSelector(new System.Random());
             playerLeveling = UnityEngine.Object.FindFirstObjectByType<PlayerLevelingComponent>();
+            if (playerLeveling == null)
+            {
+                Debug.LogError("UpgradeChoiceComponent: no PlayerLevelingComponent found in scene — upgrade screen will never trigger");
+            }
             panelRoot.SetActive(false);
         }
 
@@ -45,6 +50,13 @@ namespace ArenaSurvivor.UI
         private void HandleLevelUp(int newLevel)
         {
             List<Upgrade> options = selector.SelectRandomUnique(availableUpgrades, optionButtons.Length);
+
+            if (options.Count == 0)
+            {
+                Debug.LogError("UpgradeChoiceComponent: no upgrades available to offer — skipping level-up screen");
+                return;
+            }
+
             currentOptions = options.ToArray();
 
             for (int i = 0; i < optionButtons.Length; i++)
@@ -66,6 +78,7 @@ namespace ArenaSurvivor.UI
                 }
             }
 
+            EventSystem.current.SetSelectedGameObject(optionButtons[0].gameObject);
             panelRoot.SetActive(true);
             Time.timeScale = 0f;
         }
