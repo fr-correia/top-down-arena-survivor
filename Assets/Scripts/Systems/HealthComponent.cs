@@ -10,11 +10,13 @@ namespace ArenaSurvivor.Systems
         private Health health;
 
         public event Action OnDeath;
+        public event Action<int> OnDamaged;
 
         private void Awake()
         {
             health = new Health(maxHealth);
             health.OnDeath += HandleDeath;
+            health.OnDamaged += HandleDamaged;
         }
 
         public void ApplyDamage(int amount)
@@ -35,6 +37,11 @@ namespace ArenaSurvivor.Systems
         private void HandleDeath()
         {
             OnDeath?.Invoke();
+        }
+
+        private void HandleDamaged(int amount)
+        {
+            OnDamaged?.Invoke(amount);
         }
     }
 }

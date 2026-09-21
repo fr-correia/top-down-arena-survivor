@@ -8,10 +8,12 @@ namespace ArenaSurvivor.Player
         [SerializeField] private float followSpeed = 5f;
 
         private CameraFollow cameraFollow;
+        private ScreenShakeComponent screenShake;
 
         private void Awake()
         {
             cameraFollow = new CameraFollow();
+            screenShake = GetComponent<ScreenShakeComponent>();
         }
 
         public void SetTarget(Transform newTarget)
@@ -27,7 +29,14 @@ namespace ArenaSurvivor.Player
             }
 
             Vector2 next = cameraFollow.ComputeNextPosition(transform.position, target.position, followSpeed, Time.deltaTime);
-            transform.position = new Vector3(next.x, next.y, transform.position.z);
+            Vector3 finalPosition = new Vector3(next.x, next.y, transform.position.z);
+
+            if (screenShake != null)
+            {
+                finalPosition += screenShake.GetCurrentOffset();
+            }
+
+            transform.position = finalPosition;
         }
     }
 }

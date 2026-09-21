@@ -80,14 +80,14 @@ namespace ArenaSurvivor.UI
 
             EventSystem.current.SetSelectedGameObject(optionButtons[0].gameObject);
             panelRoot.SetActive(true);
-            Time.timeScale = 0f;
+            PauseState.Pause("upgrade");
         }
 
         private void SelectUpgrade(int optionIndex)
         {
             currentOptions[optionIndex].Apply(playerLeveling.gameObject);
             panelRoot.SetActive(false);
-            Time.timeScale = 1f;
+            PauseState.Resume("upgrade");
         }
     }
 }
