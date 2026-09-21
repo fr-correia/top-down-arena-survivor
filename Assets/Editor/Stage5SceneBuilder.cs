@@ -20,8 +20,6 @@ namespace ArenaSurvivor.EditorTools
         {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 
-            Upgrade[] upgrades = CreateUpgradeAssets();
-
             Scene scene = EditorSceneManager.OpenScene(ScenePath);
 
             if (Object.FindFirstObjectByType<UpgradeChoiceComponent>() != null)
@@ -29,6 +27,16 @@ namespace ArenaSurvivor.EditorTools
                 Debug.LogWarning("Arena Survivor: UpgradeChoiceComponent already present — Stage 5 wiring already applied, skipping.");
                 return;
             }
+
+            // Create the upgrade assets AFTER the scene is open, and use them immediately
+            // afterward with no further scene load in between. EditorSceneManager.OpenScene
+            // triggers Unity's unused-asset unload pass; freshly created ScriptableObject
+            // instances that nothing yet references (as these do, before they're assigned
+            // onto the UpgradeChoiceComponent below) can be invalidated by that pass even
+            // though the .asset files themselves are already written to disk with valid
+            // GUIDs. Creating them after the scene load — instead of before it — avoids
+            // that window entirely.
+            Upgrade[] upgrades = CreateUpgradeAssets();
 
             EnsureEventSystem();
             BuildUpgradeChoiceUI(upgrades);
