@@ -18,6 +18,11 @@ namespace ArenaSurvivor.Enemies
 
         private void OnCollisionStay2D(Collision2D collision)
         {
+            if (collision.gameObject.GetComponent<EnemyChaseComponent>() != null)
+            {
+                return;
+            }
+
             if (!cooldown.TryConsume(Time.time))
             {
                 return;
