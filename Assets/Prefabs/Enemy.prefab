@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5535332475050823544}
   - component: {fileID: 6918200681422431376}
   - component: {fileID: 6611065544552066173}
+  - component: {fileID: 4476475760578825572}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -224,3 +225,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a7dcd310c634646a20cde9f49c06c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ArenaSurvivor.Enemies::ArenaSurvivor.Enemies.EnemyDeathReaction
+--- !u!114 &4476475760578825572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082791797165107218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5670d72ccb6a9d348aac09d28f407cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArenaSurvivor.Enemies::ArenaSurvivor.Enemies.EnemyXpDrop
+  xpOrbPrefab: {fileID: 1430043720046122748, guid: 45413dba9515908478f2dbdeff2b91d5, type: 3}
