@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5365300219278840188}
   - component: {fileID: 5535332475050823544}
   - component: {fileID: 6918200681422431376}
-  - component: {fileID: 3014840881332840986}
+  - component: {fileID: 6611065544552066173}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ArenaSurvivor.Enemies::ArenaSurvivor.Enemies.EnemyContactDamage
   damageAmount: 10
   damageInterval: 1
---- !u!114 &3014840881332840986
+--- !u!114 &6611065544552066173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

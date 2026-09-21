@@ -434,7 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ArenaSurvivor.Weapons::ArenaSurvivor.Weapons.AutoAttackComponent
   attackInterval: 1
   range: 8
-  projectilePrefab: {fileID: 8885916582012612681, guid: 57f81d269dbe03545aaceddb3c4d649f, type: 3}
+  projectilePrefab: {fileID: 553076400888519657, guid: 57f81d269dbe03545aaceddb3c4d649f, type: 3}
 --- !u!1 &545519225
 GameObject:
   m_ObjectHideFlags: 0
