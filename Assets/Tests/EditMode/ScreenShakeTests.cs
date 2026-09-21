@@ -46,5 +46,16 @@ namespace ArenaSurvivor.Tests.EditMode
 
             Assert.Greater(earlyOffset.magnitude, lateOffset.magnitude);
         }
+
+        [Test]
+        public void ZeroOrNegativeDuration_ReturnsZero()
+        {
+            var shake = new ScreenShake();
+            var random = new System.Random(5);
+
+            Vector2 result = shake.ComputeOffset(0f, 0f, 0.5f, random);
+
+            Assert.AreEqual(Vector2.zero, result);
+        }
     }
 }
