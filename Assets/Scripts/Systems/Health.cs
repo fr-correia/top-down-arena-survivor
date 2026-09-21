@@ -9,6 +9,7 @@ namespace ArenaSurvivor.Systems
         public bool IsDead { get; private set; }
 
         public event Action OnDeath;
+        public event Action<int> OnDamaged;
 
         public Health(int maxHealth)
         {
@@ -24,6 +25,7 @@ namespace ArenaSurvivor.Systems
             }
 
             CurrentHealth = Math.Max(0, CurrentHealth - amount);
+            OnDamaged?.Invoke(amount);
 
             if (CurrentHealth == 0)
             {

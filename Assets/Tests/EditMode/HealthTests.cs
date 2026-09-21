@@ -110,5 +110,45 @@ namespace ArenaSurvivor.Tests.EditMode
             Assert.AreEqual(30, health.CurrentHealth);
             Assert.IsFalse(health.IsDead);
         }
+
+        [Test]
+        public void OnDamaged_FiresWithCorrectAmount_OnSuccessfulHit()
+        {
+            var health = new Health(100);
+            int receivedAmount = 0;
+            health.OnDamaged += amount => receivedAmount = amount;
+
+            health.TakeDamage(15);
+
+            Assert.AreEqual(15, receivedAmount);
+        }
+
+        [Test]
+        public void OnDamaged_DoesNotFire_ForNoOpTakeDamage()
+        {
+            var health = new Health(100);
+            int fireCount = 0;
+            health.OnDamaged += _ => fireCount++;
+
+            health.TakeDamage(0);
+            health.TakeDamage(-5);
+
+            Assert.AreEqual(0, fireCount);
+        }
+
+        [Test]
+        public void LethalHit_FiresBothOnDamagedAndOnDeath()
+        {
+            var health = new Health(10);
+            bool damagedFired = false;
+            bool deathFired = false;
+            health.OnDamaged += _ => damagedFired = true;
+            health.OnDeath += () => deathFired = true;
+
+            health.TakeDamage(10);
+
+            Assert.IsTrue(damagedFired);
+            Assert.IsTrue(deathFired);
+        }
     }
 }
