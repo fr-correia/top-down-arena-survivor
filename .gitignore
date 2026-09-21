@@ -11,12 +11,14 @@
 # Asset meta backups
 *.tmp
 
-# Visual Studio / Rider
+# Visual Studio / Rider / VS Code
 .vs/
+.vscode/
 .idea/
 *.csproj
 *.unityproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user
