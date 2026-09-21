@@ -67,12 +67,6 @@ namespace ArenaSurvivor.EditorTools
 
         private static GameObject CreateXpOrbPrefab()
         {
-            GameObject existing = AssetDatabase.LoadAssetAtPath<GameObject>(XpOrbPrefabPath);
-            if (existing != null)
-            {
-                return existing;
-            }
-
             Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(SpritePath);
 
             var orb = new GameObject("XpOrb");
@@ -84,6 +78,10 @@ namespace ArenaSurvivor.EditorTools
 
             BoxCollider2D collider = orb.AddComponent<BoxCollider2D>();
             collider.isTrigger = true;
+
+            Rigidbody2D rb = orb.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
 
             orb.AddComponent<ExperienceOrbComponent>();
 
