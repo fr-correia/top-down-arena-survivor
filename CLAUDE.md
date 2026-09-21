@@ -78,4 +78,5 @@ If Unity batch-mode compilation is set up (`Unity -batchmode -quit -projectPath 
 from the Unity Console after they reload the project, and treat that as the test result.
 
 ## Current status
-Stage 1 (player movement + camera follow) in progress.
+All 7 stages complete and merged to `main`. See [README.md](README.md) for a
+summary of what's implemented.
